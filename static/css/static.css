@@ -1,0 +1,26 @@
+.el-table td, .el-table th {
+  padding: 8px 0;
+}
+.el-table {
+  font-size: 13px;
+  text-align: left;
+}
+
+.el-autocomplete-suggestion li {
+  padding: 0 8px;
+  font-size: 12px;
+  line-height: 28px;
+}
+.el-dialog__header {
+  text-align: left;
+  background-color: #86DAB7;
+}
+.el-dialog__title,.el-dialog__headerbtn .el-dialog__close {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+.el-dialog__body {
+  padding: 4px 20px;
+  /* background-color: #86DAB7; */
+}
