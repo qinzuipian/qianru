@@ -38,11 +38,16 @@ export default {
     // 关闭单个标签
     closeTags(index) {
       const delItem = this.tagsList.splice(index, 1)[0];
+      console.log(index)
+      if (index === 0) {
+        this.$router.push("/home");
+      }
       const item = this.tagsList[index]
         ? this.tagsList[index]
         : this.tagsList[index - 1];
-				 delItem.path === this.$route.fullPath && this.$router.push(item.path);
-    /*   if (item) {
+      delItem.path === this.$route.fullPath && this.$router.push(item.path);
+
+      /*   if (item) {
         console.log(item)
         delItem.path === this.$route.fullPath && this.$router.push(item.path);
       } else if (this.limit == "1") {
@@ -54,7 +59,7 @@ export default {
     // 关闭全部标签
     closeAll() {
       this.tagsList = [];
-			this.$router.push("/home");
+      this.$router.push("/home");
       /* if (this.limit == "1") {
         this.$router.push("/home");
       } else if (this.limit == "2") {
@@ -116,7 +121,7 @@ export default {
   background: #fff;
   padding-right: 120px;
   box-shadow: 0 5px 10px #ddd;
-  z-index:999;
+  z-index: 999;
 }
 
 .tags ul {

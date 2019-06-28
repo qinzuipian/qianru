@@ -1,10 +1,9 @@
 <template>
-    <div>
-        <div class="main">
-            欢迎！系统管理员           
-        </div>
-    </div>
-    
+    <div class="main">
+      <p>首页基本信息</p>
+      <p>嵌入式医保管理系统</p>
+      <p>欢迎！系统管理员</p>          
+    </div>   
 </template>
 
 
@@ -13,19 +12,17 @@ import axios from "axios";
 // let echarts = require("echarts");
 export default {
   data() {
-    return {
-     
-    };
+    return {};
   },
   methods: {
     initConnection() {//嵌入式医保初始化
-           //初始化连接所需参数
+      //初始化连接所需参数
       var requestId= "000";
-      var akb020= "SYYY0010";
-      var aab034= "61100001";
-      var bkb026= "888888";
-      var uscode= "999999";
-      var usname= "超级管理员";
+      var  akb020 = localStorage.getItem("akb020");
+      var  bkb026 = localStorage.getItem("bkb026");
+      var  aab034 = localStorage.getItem("aab034");
+      var  uscode = localStorage.getItem("uscode");
+      var  usname = localStorage.getItem("usname");
       var s_ini = 
 				"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
 				"\n" + 
@@ -89,8 +86,29 @@ export default {
   margin-top:50px;
   font-size: 30px;
   color: aquamarine;
+  width: 94%;
+  height: 200px;
+  margin: 30px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
-
+.main p:nth-child(1) {
+    color: #999;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    background-color: #F5F5F5;
+    padding: 0;
+    margin: 0;
+    height:40px;
+    line-height: 40px;
+    border-radius: 8px 8px 0 0;
+    padding-left: 10px;
+}
+.main p:nth-child(2) {
+    font-size: 20px;
+    color: #999;
+}
 ::-webkit-scrollbar {
   display: none;
 }

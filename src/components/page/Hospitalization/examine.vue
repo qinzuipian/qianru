@@ -54,8 +54,7 @@
 									</el-col>
 								</el-row>
 								
-								<el-row>
-									
+								<el-row>									
 									<el-col :span="8">
 										<div class="grid-content">
 											<span>主治医师1:</span>
@@ -96,42 +95,35 @@
 									  </div>
 									</el-col>
 								</el-row>
-							<el-row>
+							  <el-row>
 								
-								<el-col :span="8">
-									<div class="grid-content">
-										<span>联系地址:</span>
-										<el-input v-model="hosdata.AAE006" placeholder="请输入内容"></el-input>
-									</div>
-								</el-col>
-								<el-col :span="8">
-									<div class="grid-content">
-										<span>参保地行政区划:</span>
-										<el-input v-model="hosdata.AAB034" placeholder="请输入内容"></el-input>
-									</div>
-								</el-col>
-							</el-row>
-							
-							<el-row>
-								<el-col :span="24">
-									<div class="grid-content">
-										 <el-button type="success" @click="gitHosave">住院登记保存</el-button>
-									</div>
-								</el-col>
-							</el-row>
-					
+									<el-col :span="8">
+										<div class="grid-content">
+											<span>联系地址:</span>
+											<el-input v-model="hosdata.AAE006" placeholder="请输入内容"></el-input>
+										</div>
+									</el-col>
+									<el-col :span="8">
+										<div class="grid-content">
+											<span>参保地行政区划:</span>
+											<el-input v-model="hosdata.AAB034" placeholder="请输入内容"></el-input>
+										</div>
+									</el-col>
+									</el-row>
+							  
+							  <el-row>
+									<el-col :span="24">
+										<div class="grid-content">
+											<el-button type="success" @click="gitHosave">住院登记保存</el-button>
+										</div>
+									</el-col>
+							  </el-row>					
 				</div>
     </div>
 </template>
 
 <script>
-/* import screen from "../../component/screen";
-import reply from "../../component/reply";
-import drugshow from "../../component/drugshow";
-import addData from "../../component/addData"; */
-// import common from "../../common/common.js";
 import axios from "axios";
-
 let moment = require("moment");
 export default {
   name: "examine",
@@ -139,19 +131,20 @@ export default {
     return {
 			hospitalNum:"",
 			hosdata:{
-				/* BKC023:"",
-				BKC329:"",
-				AKC192:"",
-				BKC286:"",
-				AKC193:"",
-				BKC059:"",
-				BKC159:"",
-				BKC160:"",
-				BKC051:"",
-				BKC089:"",
-				AAE005:"",
-				AAE006:"" */
-	
+			AKC193:"",
+			BKC159:"",
+			BKC160:"",
+			BKC329:"",
+			AAE006:"",
+			AAE005:"",
+			AKC192:"",
+			BKC023:"",
+			BKC051:"",
+			BKC059:"",
+			BKC089:"",
+			BKC286:"",
+			AAB034:"",
+			AAC003:""				
 			},
 			hospitalxml:""
 			
@@ -162,13 +155,14 @@ export default {
 
   },
   watch: {
+		hospitalNum(num) {
+			console.log((num/Math.pow(10,10)).toFixed(10).substr(2));
+		}
   },
   filters: {
 
   },
   methods: {
-  
-
     // 页面初始化请求参数
     gitHospitlaMsg() {
       // 请求list
@@ -184,12 +178,29 @@ export default {
       })
         .then(res => {
           if (res.data.code == 0) {
-							this.hosdata = res.data.data;
+							// this.hosdata = res.data.data;
 							// this.hosdata.AAB034='商洛市';
-							this.hosdata.AAB034='61100001';
-							console.log(this.hosdata)
-							// var hosdata = res.data.data;
-							// hosdata.BKC023 == undefined?this.hosdata.BKC023 = "":this.hosdata.BKC023 = hosdata.BKC023;
+						
+							// console.log(this.hosdata)
+							var hosdata = res.data.data;
+							// this.hosdata.AAB034='61100001';
+							this.hosdata.AAC003 = hosdata.AAC003;
+							// localStorage.setItem('huazhe',hosdata.AAC003);
+							hosdata.AKC193 == undefined?this.hosdata.AKC193 = "":this.hosdata.AKC193 = hosdata.AKC193;
+							hosdata.BKC159 == undefined?this.hosdata.BKC159 = "":this.hosdata.BKC159 = hosdata.BKC159;
+							hosdata.BKC160 == undefined?this.hosdata.BKC160 = "":this.hosdata.BKC160 = hosdata.BKC160;
+							hosdata.BKC329 == undefined?this.hosdata.BKC329 = "":this.hosdata.BKC329 = hosdata.BKC329;
+							hosdata.AAE006 == undefined?this.hosdata.AAE006 = "":this.hosdata.AAE006 = hosdata.AAE006;
+
+							hosdata.AAE005 == undefined?this.hosdata.AAE005 = "":this.hosdata.AAE005 = hosdata.AAE005;
+							hosdata.AKC192 == undefined?this.hosdata.AKC192 = "":this.hosdata.AKC192 = hosdata.AKC192;
+							hosdata.BKC023 == undefined?this.hosdata.BKC023 = "":this.hosdata.BKC023 = hosdata.BKC023;
+							hosdata.BKC051 == undefined?this.hosdata.BKC051 = "":this.hosdata.BKC051 = hosdata.BKC051;
+							hosdata.BKC059 == undefined?this.hosdata.BKC059 = "":this.hosdata.BKC059 = hosdata.BKC059;
+							hosdata.BKC089 == undefined?this.hosdata.BKC089 = "":this.hosdata.BKC089 = hosdata.BKC089;
+							hosdata.BKC286 == undefined?this.hosdata.BKC286 = "":this.hosdata.BKC286 = hosdata.BKC286;
+							hosdata.AAB034 == undefined?this.hosdata.AAB034 = "61100001":this.hosdata.AAB034 = "61100001";
+							
           } else {
             this.$message.error(res.data.msg);
           }
@@ -201,14 +212,14 @@ export default {
 		gitHosave() {
 		/* 	this.hosdata.requestId = "121";
 			console.log(this.hosdata) */
-			if(this.hosdata.AKC193 == undefined || this.hosdata.BKC159 == undefined || this.hosdata.BKC160 == undefined
+			/* if(this.hosdata.AKC193 == undefined || this.hosdata.BKC159 == undefined || this.hosdata.BKC160 == undefined
 			 || this.hosdata.BKC329 == undefined || this.hosdata.AAE006 == undefined) {
 				this.hosdata.AKC193 = "";
 				this.hosdata.BKC159 = "";
 				this.hosdata.BKC160 = "";
 				this.hosdata.BKC329 = "";
 				this.hosdata.AAE006 = "";
-			} 
+			}  */
 			console.log(this.hosdata)
 			axios({
 			  method: "post",
@@ -228,6 +239,12 @@ export default {
 					BKC160:this.hosdata.BKC160,
 					BKC329:this.hosdata.BKC329,
 					AAE006:this.hosdata.AAE006,
+
+					akb020:localStorage.getItem("akb020"),
+					bkb026:localStorage.getItem("bkb026"),
+					aab034:localStorage.getItem("aab034"),
+					uscode:localStorage.getItem("uscode"),
+					usname:localStorage.getItem("usname"),
 					requestId:"121"
 				},
 				
@@ -249,10 +266,11 @@ export default {
 		},
 		
 		hospitalDown(param) {
-			// console.log(param)
+			 console.log(param)
 			 var state = WSCall.biz(param);
-				if (state == 1) {
-				var res = WSCall.retbiz; 
+				console.log(state)
+				if (state == 1) {			 
+				 var res = WSCall.retbiz; 
 			/* 	var state =1;
 				if (state == 1) {
 				var res = "<?xml version=\"1.0\" encoding=\"GBK\" standalone=\"no\" ?>"
@@ -336,12 +354,12 @@ export default {
 						axios({
 							method: "post",
 							url: axios.PARK_API + "/medical_reimbursement/hospitalizationregister/saveHospitalizationRegistration",
-							params: {
+							data: {
 										xml : wordsContent
-							}
-						/* 	headers: {
+							},
+							headers: {
 								"Content-Type": "application/json;charset=UTF-8"
-							} */
+							}
 						})
 							.then(res => {
 								if (res.data.code == 0) {
@@ -376,8 +394,6 @@ export default {
 			}
 		}
 		
-			
-
   },
   computed: {},
   components: {

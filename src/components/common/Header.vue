@@ -19,14 +19,13 @@
                     </el-tooltip>
                 </div>
                 <!-- 用户头像 -->
-                <div class="user-avator"><img src="static/img/img.jpg"></div>
+                <div class="user-avator"><img src="static/img/img.png"></div>
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click">
                     <span class="el-dropdown-link">
                         {{username}} <i class="el-icon-caret-bottom"></i>
                     </span>
-                    <el-dropdown-menu slot="dropdown">
-                   
+                    <el-dropdown-menu slot="dropdown">          
                         <el-dropdown-item @click.native="password">修改密码</el-dropdown-item>
                         <el-dropdown-item  @click.native="loginOut">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
@@ -38,6 +37,7 @@
 <script>
 import bus from "../common/bus";
 import axios from "axios";
+import qs from 'qs';
 export default {
   data() {
     return {
@@ -66,11 +66,11 @@ export default {
     //页面初始化
     pageInit() {
           var requestId= "000";
-          var akb020= "SYYY0010";
-          var aab034= "61100001";
-          var bkb026= "888888";
-          var uscode= "999999";
-          var usname= "超级管理员";
+          var  akb020 = localStorage.getItem("akb020");
+          var  bkb026 = localStorage.getItem("bkb026");
+          var  aab034 = localStorage.getItem("aab034");
+          var  uscode = localStorage.getItem("uscode");
+          var  usname = localStorage.getItem("usname");
           var s_ini = 
             "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
             "\n" + 
@@ -112,32 +112,31 @@ export default {
           }        
         },
     loginOut() {
-      this.$router.push({ path: "/login" });
       axios({
         method: "post",
         url: axios.PARK_API + "/sys-mgr/sys/logout",
-        /*   params: {
+       /*  params: {
            token: localStorage.getItem("token")
         }, */
-        /*  data: {
+       /*  data: qs.stringify({
           token: localStorage.getItem("token")
-        }, */
+        }), */
         headers: {
           "Content-Type": "application/json;charset=UTF-8",
-            token: localStorage.getItem("token")
+           token: localStorage.getItem("token")
         }
       })
         .then(res => {
           if (res.data.code == 0) {
             localStorage.removeItem("token");
-            localStorage.removeItem("navList");
-            localStorage.removeItem("limited");
-            // this.$router.push({ path: "/login" });
-            if (this.limit == "1") {
-              this.$router.push({ path: "/login" });
-            } else if (this.limit == "2") {
-              this.$router.push({ path: "/hoslogin" });
-            }
+            localStorage.removeItem("akb020");
+            localStorage.removeItem("bkb026");
+            localStorage.removeItem("aab034");
+            localStorage.removeItem("uscode");
+            localStorage.removeItem("usname");
+            // localStorage.removeItem("navList");
+            // localStorage.removeItem("limited");
+            this.$router.push({ path: "/login" });
           } else {
             this.$message.error(res.data.msg);
           }
@@ -252,15 +251,15 @@ export default {
   color: #fff;
 }
 .user-name {
-  margin-left: 16px;
+  margin-left: 4px;
 }
 .user-avator {
   margin-left: 20px;
 }
 .user-avator img {
   display: block;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 .el-dropdown-link {

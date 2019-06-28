@@ -20,6 +20,22 @@ export default new Router({
                     component: resolve => require(['../components/page/home/home.vue'], resolve),
                     meta: { title: '首页' }
                 },
+                //系统管理
+                /* {
+                    path: '/Adminsystem',
+                    component: resolve => require(['../components/page/system/Adminsystem.vue'], resolve),
+                    meta: { title: '管理员管理' }
+                },
+                {
+                    path: '/meunSystem',
+                    component: resolve => require(['../components/page/system/meunSystem.vue'], resolve),
+                    meta: { title: '菜单管理' }
+                },
+                {
+                    path: '/roleSystem',
+                    component: resolve => require(['../components/page/system/roleSystem.vue'], resolve),
+                    meta: { title: '角色管理' }
+                }, */
                 //住院系统
                 {
                     path: '/HospitalizationExamine',
@@ -61,8 +77,7 @@ export default new Router({
                     component: resolve => require(['../components/page/Hospitalization/hospitalprint.vue'], resolve),
                     meta: { title: '出院结算打印' }
                 },
-          
-             
+
                 //门诊系统
                 {
                     path: '/clinicExamine',
@@ -79,6 +94,44 @@ export default new Router({
                     component: resolve => require(['../components/page/clinic/inquiry.vue'], resolve),
                     meta: { title: '门诊结算打印' }
                 },
+
+                // 目录管理
+                {
+                    path: '/medicalMenu',
+                    component: resolve => require(['../components/page/menuList/medicalMenu.vue'], resolve),
+                    meta: { title: '药品目录对应'}
+                },
+                {
+                    path: '/treatMenu',
+                    component: resolve => require(['../components/page/menuList/treatMenu.vue'], resolve),
+                    meta: { title: '诊疗目录对应' }
+                },
+                {
+                    path: '/serviceMenu',
+                    component: resolve => require(['../components/page/menuList/serviceMenu.vue'], resolve),
+                    meta: { title: '服务目录保存' }
+                },
+                {
+                    path: '/menuUpload',
+                    component: resolve => require(['../components/page/menuList/menuUpload.vue'], resolve),
+                    meta: { title: '目录对应上传' }
+                },
+                {
+                    path: '/menuDownload',
+                    component: resolve => require(['../components/page/menuList/menuDownload.vue'], resolve),
+                    meta: { title: '医疗机构目录上传' }
+                },
+                {
+                    path: '/menuXiazai',
+                    component: resolve => require(['../components/page/menuList/menuXiazai.vue'], resolve),
+                    meta: { title: '目录对应结果下载' }
+                },
+                {
+                    path: '/menuQuxiao',
+                    component: resolve => require(['../components/page/menuList/menuQuxiao.vue'], resolve),
+                    meta: { title: '目录对应取消' }
+                },
+
                
                 //修改密码
                 {

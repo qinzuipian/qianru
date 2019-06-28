@@ -64,88 +64,93 @@ export default {
   name: "inquiry",
   data() {
     return {
-      hospitalNum:"",
-      AKC190:"",
-      AKA130:"",
-      AAB034:"",
-      AAE140:""
+      hospitalNum: "",
+      AKC190: "",
+      AKA130: "",
+      AAB034: "",
+      AAE140: ""
     };
   },
-  watch: {
-
-  },
-  filters: {
-
-   
-  },
+  watch: {},
+  filters: {},
   methods: {
     //请求list
     gitHospitlaMsg() {
-        axios({
+      axios({
         method: "post",
-        url: axios.PARK_API + "/medical_reimbursement/hospitalizationregister/queryHosInfo",
+        url:
+          axios.PARK_API +
+          "/medical_reimbursement/hospitalizationregister/queryHosInfo",
         params: {
-						bkc023:this.hospitalNum
-				},
+          bkc023: this.hospitalNum
+        }
         /* headers: {
           "Content-Type": "application/json;charset=UTF-8"
         } */
-      })
-        .then(res => {
-          if (res.data.code == 0) {
-              var hosdata = res.data.data;
-              // this.AAB034 ='61100001';
-              this.AAB034 =hosdata.AAB034;
-              this.AKC190 = hosdata.AKC190;
-              this.AKA130 = hosdata.AKA130;
-              this.AAE140 = hosdata.AAE140;
-							// this.hosdata.AAB034='商洛市';
-						/* 	this.hosdata.AAB034='61100001';
+      }).then(res => {
+        if (res.data.code == 0) {
+          var hosdata = res.data.data;
+          // this.AAB034 ='61100001';
+          this.AAB034 = hosdata.AAB034;
+          this.AKC190 = hosdata.AKC190;
+          this.AKA130 = hosdata.AKA130;
+          this.AAE140 = hosdata.AAE140;
+          // this.hosdata.AAB034='商洛市';
+          /* 	this.hosdata.AAB034='61100001';
 							console.log(this.hosdata) */
-						
-          } else {
-            this.$message.error(res.data.msg);
-          }
-        })
+        } else if (res.data.code == 203) {
+          this.$message.warning(res.data.msg);
+        } else {
+          this.$message.error(res.data.msg);
+        }
+      });
     },
 
     gitHosave() {
-    /*   if(this.AKA130 == undefined) {
+      /*   if(this.AKA130 == undefined) {
         this.AKA130 = "";
       } */
       axios({
         method: "post",
         url: axios.PARK_API + "/medical_reimbursement/splicParam/splicingParam",
         data: {
-            AAB034:this.AAB034,
-            AKC190:this.AKC190,
-            AKA130:this.AKA130,
-            AAE140:this.AAE140,
-            requestId:"918"
-        },				
-			  headers: {
-			    "Content-Type": "application/json;charset=UTF-8"
-			  }
-			})
-			  .then(res => {
-			    if (res.data.code == 0) {
-						this.hospitalxml = res.data.data;
-            this.hosPrint(this.hospitalxml);
-					
-			    } else {
-			      this.$message.error(res.data.msg);
-			    }
-			  })
-			 /* .catch(error => {
+          AAB034: this.AAB034,
+          AKC190: this.AKC190,
+          AKA130: this.AKA130,
+          AAE140: this.AAE140,
+          requestId: "918",
+
+          akb020: localStorage.getItem("akb020"),
+          bkb026: localStorage.getItem("bkb026"),
+          aab034: localStorage.getItem("aab034"),
+          uscode: localStorage.getItem("uscode"),
+          usname: localStorage.getItem("usname")
+        },
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }).then(res => {
+        if (res.data.code == 0) {
+          this.hospitalxml = res.data.data;
+          this.hosPrint(this.hospitalxml);
+        } else {
+          this.$message.error(res.data.msg);
+        }
+      });
+      /* .catch(error => {
 			    this.$message.error("请检查网络");
 			  }); */
     },
-    
+
     hosPrint(param) {
-       var state = WSCall.biz(param);
-				if (state == 1) {
-          var res = WSCall.retbiz; 
-        }
+      console.log(param);
+      var state = WSCall.biz(param);
+      console.log(state)
+      if (state == 1) {
+        var res = WSCall.retbiz;
+      } else {
+        this.$message.error('结算打印失败')
+      }
     }
     /* // 点击打印按钮调用打印函数
     printBtn() {
@@ -158,23 +163,18 @@ export default {
       document.body.innerHTML = oldContent;
       return false;
     }, */
-   
-
   },
-  created() {
-  },
-  components: {
-  
-  }
+  created() {},
+  components: {}
 };
 </script>
 
 <style scoped>
 .top {
-	padding: 10px;
+  padding: 10px;
 }
 .top .el-input {
-	width: 20%;
+  width: 20%;
 }
 .top span {
   font-size: 14px;
@@ -205,11 +205,11 @@ export default {
   width: 100%;
   font-size: 14px;
 }
- #print .printTable tr td {
+#print .printTable tr td {
   text-align: center;
   width: 120px;
   height: 32px;
   border: 1px solid gray;
-} 
+}
 </style>
 

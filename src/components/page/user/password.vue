@@ -81,18 +81,18 @@ export default {
             url: axios.PARK_API + "/sys-mgr/sys/user/password",
             data: {
               password: this.ruleForm2.pass,
-              newPassword: this.ruleForm2.age
+              newPassword: this.ruleForm2.age,
+              token: localStorage.getItem("token")
             },
             headers: {
               "Content-Type": "application/json;charset=UTF-8",
-              token: localStorage.getItem("token")
+               
             }
           })
             .then(res => {
               if (res.data.code == 0) {
-                   this.$message('密码修改成功');
-                this.$router.push({ path: "/app" });
-               
+                  this.$message.success('密码修改成功');
+                  this.$router.push({ path: "/home" });           
               } else {
                 this.$message.error(res.data.msg);
               }

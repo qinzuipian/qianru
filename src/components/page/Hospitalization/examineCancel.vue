@@ -60,8 +60,7 @@
 										 <el-button type="success" @click="gitHosave">住院登记保存</el-button>
 									</div>
 								</el-col>
-							</el-row> -->
-					
+							</el-row> -->					
 				</div>
     </div>
 </template>
@@ -85,7 +84,6 @@ export default {
 				AKC192:""
 			},
 			hospitalxml:""
-			
     };
   },
 
@@ -103,7 +101,7 @@ export default {
       // 请求list
       axios({
         method: "post",
-        url: axios.PARK_API + "/medical_reimbursement/his/readHosRegistInfo",
+        url: axios.PARK_API + "/medical_reimbursement/hospitalizationregister/queryHosInfo",
         params: {
 						bkc023:this.hospitalNum
 				},
@@ -113,9 +111,9 @@ export default {
       })
         .then(res => {
           if (res.data.code == 0) {
-							this.hosdata = res.data.data;
+							// this.hosdata = res.data.data;
 							// this.hosdata.AAB034='商洛市';
-							this.hosdata.AAB034 = '61100001';
+							// this.hosdata.AAB034 = '61100001';
 							console.log(this.hosdata)
 							var hosdata = res.data.data;
 							hosdata.AKC190 == undefined?this.hosdata.AKC190 = "":this.hosdata.AKC190 = hosdata.AKC190;
@@ -123,6 +121,7 @@ export default {
 							hosdata.AKA130 == undefined?this.hosdata.AKA130 = "":this.hosdata.AKA130 = hosdata.AKA130;
 							hosdata.BKC023 == undefined?this.hosdata.BKC023 = "":this.hosdata.BKC023 = hosdata.BKC023;
 							hosdata.AKC192 == undefined?this.hosdata.AKC192 = "":this.hosdata.AKC192 = hosdata.AKC192;
+							hosdata.AAB034 == undefined?this.hosdata.AAB034 = "61100001":this.hosdata.AAB034 = hosdata.AAB034;
           } else {
             this.$message.error(res.data.msg);
           }
@@ -130,28 +129,27 @@ export default {
       /*   .catch(error => {
           this.$message.error("请检查网络");
         }); */
-    },
-		gitHosave() {
+		},
+		// 参数转换xml
+		gethosCancel() {
 			console.log(this.hosdata)
 			axios({
 			  method: "post",
 			  url: axios.PARK_API + "/medical_reimbursement/splicParam/splicingParam",
 			  data: {
-					AAE005:this.hosdata.AAE005,
-					AKC192:this.hosdata.AKC192,
-					BKC023:this.hosdata.BKC023,
-					BKC051:this.hosdata.BKC051,
-					BKC059:this.hosdata.BKC059,
-					//BKC080:this.hosdata.BKC080,
-					BKC089:this.hosdata.BKC089,
-					BKC286:this.hosdata.BKC286,
+					AKC190:this.hosdata.AKC190,
 					AAB034:this.hosdata.AAB034,
-					AKC193:this.hosdata.AKC193,				
-					BKC159:this.hosdata.BKC159,
-					BKC160:this.hosdata.BKC160,
-					BKC329:this.hosdata.BKC329,
-					AAE006:this.hosdata.AAE006,
-					requestId:"121"
+					AAE140:this.hosdata.AAE140,
+					AKA130:this.hosdata.AKA130,
+					BKC023:this.hosdata.BKC023,
+					AKC192:this.hosdata.AKC192,		
+					requestId:"421",
+
+					akb020:localStorage.getItem("akb020"),
+					bkb026:localStorage.getItem("bkb026"),
+					aab034:localStorage.getItem("aab034"),
+					uscode:localStorage.getItem("uscode"),
+					usname:localStorage.getItem("usname")
 				},
 				
 			  headers: {
@@ -170,137 +168,38 @@ export default {
 			    this.$message.error("请检查网络");
 			  }); */
 		},
-		
 		hospitalDown(param) {
-			// console.log(param)
-			 var state = WSCall.biz(param);
-				if (state == 1) {
-				var res = WSCall.retbiz; 
-			/* 	var state =1;
-				if (state == 1) {
-				var res = "<?xml version=\"1.0\" encoding=\"GBK\" standalone=\"no\" ?>"
-					+"<transferinfo>"             
-					+"<headinfo>"
-					+"<REQUESTID>121</REQUESTID>"
-					+"<AKB020>SNYY0005</AKB020>"
-					+"<AAB034>61100001</AAB034>"
-					+"<BKB026>888888</BKB026>"
-					+"<USCODE>管理员</USCODE>"
-					+"<USNAME>管理员</USNAME>"
-					+"<DATACOUNT>1</DATACOUNT>"
-					+"<ROWCOUNT1>1</ROWCOUNT1>"
-					+"<ROWCOUNT2>0</ROWCOUNT2>"
-					+"<ROWCOUNT3>0</ROWCOUNT3>"
-					+"<ROWCOUNT4>0</ROWCOUNT4>"
-					+"<ERRCODE>1</ERRCODE>"
-					+"<ERRMSG></ERRMSG>"
-					+"</headinfo>"
-					+"<datas>"
-					+"<data1>"
-							+"<row>																								"
-							+"<AKC190>000000009515984</AKC190>"
-							+"<AKB020>SNYY0005</AKB020>"
-							+"<AKB021>西关医院</AKB021>"
-							+"<AAB001>11000004170</AAB001>"
-							+"<AAB004>山阳县政策破产企业退休人员__酒厂</AAB004>"
-							+"<AAC002>612525195112090155</AAC002>"
-							+"<AAC001>100000363505</AAC001>"
-							+"<AAC003>詹凯朝</AAC003>"
-							+"<AAC004>1</AAC004>"
-							+"<AKC020>0001906861100024</AKC020>"
-							+"<AKC021>21</AKC021>"
-							+"<AAC008>2</AAC008>"
-							+"<AKC401>1</AKC401>										"
-							+"<BAC515>1</BAC515>"
-							+"<AKA130>21</AKA130>"
-							+"<BKC051>外科</BKC051>"
-							+"<AKC192>2019-06-03</AKC192>"
-							+"<ACK222>1</ACK222>"
-							+"<BKC286>十二指肠钩虫病</BKC286>"
-							+"<AKC193>B76.000</AKC193>"
-							+"<AKA120>00001</AKA120>"
-							+"<AKC194></AKC194>"
-							+"<AKC195></AKC195>"
-							+"<BKC287></BKC287>"								
-							+"<AKC196></AKC196>"
-							+"<BKC059>张三</BKC059>"
-							+"<BKC089></BKC089>"
-							+"<AAE006></AAE006>"
-							+"<AAE005>13811111111</AAE005>"
-							+"<BKC080>周一</BKC080>"
-							+"<AAC006>1951-12-09</AAC006>"
-							+"<AAE011>管理员</AAE011>"
-							+"<AAE036>2019-06-04 11:47:17</AAE036>"
-							+"<BKC023>0000000042</BKC023>"
-							+"<BKC036>1</BKC036>"
-							+"<BKC067></BKC067>"
-							+"<AAE040>2019-06-04 11:47:18</AAE040>"
-							+"<AAB034>61100001</AAB034>"
-							+"<BAA001>61100024</BAA001>"
-							+"<AKC191>2</AKC191>"
-							+"<BKA005></BKA005>"
-							+"<AKC255></AKC255>	"
-							+"<AKC197>0</AKC197>"
-							+"<AAE140>3</AAE140>"
-							+"<BKC256>0.0</BKC256>"
-							+"<AKC204></AKC204>"
-							+"<AKC206></AKC206>"
-							+"<AKC207></AKC207>"
-							+"<AKC216></AKC216>"
-							+"<AKC217></AKC217>"
-							+"<AKC209></AKC209>"
-						+"</row>"
-					+"</data1>"
-				+"</datas>"
-			+"</transferinfo>"; */
-
-				var wordsContent = encodeURIComponent(res);
-				// 将下载下来的数据保存到数据库
-						axios({
-							method: "post",
-							url: axios.PARK_API + "/medical_reimbursement/hospitalizationregister/saveHospitalizationRegistration",
-							params: {
-										xml : wordsContent
-							}
-						/* 	headers: {
-								"Content-Type": "application/json;charset=UTF-8"
-							} */
-						})
-							.then(res => {
-								if (res.data.code == 0) {
-									 this.$message.success('登记成功');
-									
-								} else {
-									this.$message.error(res.data.msg);
-								}
-							})
-						/* .catch(error => {
-							this.$message.error("请检查网络");
-						}); */
-			/* 	$.ajax({
-					type : "POST",
-					url : baseURL
-							+ "/medical_reimbursement/hospitalizationregister/saveHospitalizationRegistration",
-					data : {
-						"xml" : wordsContent
-					},
-					success : function(r) {
-						if (r.code === 0) {
-							alert('登记成功', function(index) {
-								vm.reload();
-							});
-						} else {
-							alert(r.msg);
-						}
-					}
-				}); */
+			console.log(param)
+			var state = WSCall.biz(param);
+			console.log(state)
+			if (state == 1) {
+				var res = WSCall.retbiz;
+				this.$message.success('住院登记撤销成功');
+				this.hosLogindelete();
 			} else {
-				 this.$message.warning('登记失败');
+				this.$message.error('住院登记撤销失败')	
 			}
 		},
-		// 住院登记撤销
-		gethosCancel() {
-
+		
+		// 住院登记撤销删除
+		hosLogindelete() {
+				axios({
+			  method: "post",
+			  url: axios.PARK_API + "/medical_reimbursement/hospitalizationregister/delete",
+			  data: {
+					AKC190:this.hosdata.AKC190,
+				},				
+			  headers: {
+			    "Content-Type": "application/json;charset=UTF-8"
+			  }
+			})
+			  .then(res => {
+			    if (res.data.code == 0) {
+						console.log('住院登记撤销成功')
+			    } else {
+			      this.$message.error(res.data.msg);
+			    }
+			  })
 		}
   },
   computed: {},

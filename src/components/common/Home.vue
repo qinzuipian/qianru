@@ -54,7 +54,7 @@
                 this.tagsList = arr;
                 // console.log(this.tagsList)
             })
-            // this.getInfor();
+            this.getInfor();
         }
     }
 </script>

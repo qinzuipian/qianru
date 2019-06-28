@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <!-- <div class="ms-title">后台管理系统</div> -->
+            <div class="ms-title">嵌入式医保系统</div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
 									 <!-- @focus="loginBlur" -->
@@ -28,7 +28,7 @@
           西安卫康数据系统有限公司 
           <!-- <br> -->
           &nbsp;&nbsp;
-          技术支持电话：18192163896
+          <!-- 技术支持电话：18192163896 -->
         </div>
     </div>
 </template>
@@ -39,8 +39,8 @@ export default {
   data: function() {
     return {
       ruleForm: {
-        userName: localStorage.getItem('user'),
-        password: "",
+        userName: localStorage.getItem("user"),
+        password: ""
       },
       rules: {
         userName: [
@@ -48,23 +48,21 @@ export default {
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       },
-      loginLoading:1
+      loginLoading: 1
     };
   },
   methods: {
     submitForm(formName) {
-			console.log(formName)
-      this.$router.push({ path: "/home" });
-      /* this.$refs[formName].validate(valid => {
-    
+      // this.$router.push({ path: "/home" });
+      this.$refs[formName].validate(valid => {
         if (valid) {
-          localStorage.setItem('user',this.ruleForm.userName);
+          localStorage.setItem("user", this.ruleForm.userName);
           this.loginLoading = 2;
           axios({
             method: "post",
             url: axios.PARK_API + "/sys-mgr/sys/login",
             data: {
-              userName: this.ruleForm.userName,
+              username: this.ruleForm.userName,
               password: this.ruleForm.password
             },
             headers: {
@@ -74,26 +72,32 @@ export default {
             .then(res => {
               if (res.data.code == 0) {
                 localStorage.setItem("token", res.data.token);
-                localStorage.setItem("navList", res.data.roleList);
+                
+                localStorage.setItem("akb020",res.data.user.aKB020);
+                localStorage.setItem("bkb026",res.data.user.bKB026);
+                localStorage.setItem("aab034",res.data.user.aAB034);
+                localStorage.setItem("uscode",res.data.user.uSCODE);
+                localStorage.setItem("usname",res.data.user.uSNAME);
+                /*localStorage.setItem("navList", res.data.roleList);
                 localStorage.setItem("limited", "1");
-                localStorage.setItem("mainUser", this.userName);
+                localStorage.setItem("mainUser", this.userName); */
                 // todo  路由有一个问题，这里跳转到app    app默认路由是住院审核   如果用户没有住院审核的页面权限   那么会产生冲突  会404页面
-                // this.$router.push("/HospitalizationExamine");
                 this.$router.push({ path: "/home" });
               } else {
                 this.$message.error(res.data.msg);
               }
             })
             .catch(error => {
-              // this.$message.error('请检查网络');
+              this.$message.error('请检查网络');
+              this.loginLoading = 1;
             });
         } else {
           console.log("error submit!!");
           return false;
         }
-      }); */
-    },
-   /* loginBlur() {
+      });
+    }
+    /* loginBlur() {
       axios({
         method: "post",
         url: axios.PARK_API + "/sys-mgr/info",
@@ -139,20 +143,22 @@ export default {
   font-size: 20px;
   color: #fff;
   border-bottom: 1px solid #ddd;
+  margin-bottom:10%;
 }
 .ms-login {
   position: absolute;
-  left: 36%;
-  top: 76%;
-  width: 350px;
+  right: 12%;
+  top: 56%;
+  width: 380px;
+  height:50%;
   margin: -190px 0 0 -175px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.3);
   overflow: hidden;
 }
-/*   .ms-content{
-        padding: 30px 30px;
-    } */
+.ms-content{
+  padding: 14px;
+}
 .login-btn {
   text-align: center;
 }
@@ -176,10 +182,10 @@ export default {
   /* line-height: 60px; */
   text-align: left;
   /* background:rgba(0,0,0, .5); */
-  position:absolute;
+  position: absolute;
   bottom: 2px;
   right: 10px;
-  color:#fff;
+  color: #fff;
   font-size: 14px;
 }
 </style>
