@@ -69,7 +69,7 @@ export default {
       collapse: false,
       limit: "",
       items:[],
-     /*items: [
+      /*items: [
         {
           icon: "fa fa-home fa-lg",
           index: "home",
@@ -137,40 +137,124 @@ export default {
         }
       ], */
 
-    /*items: [
+      // 测试目录
+     /*  items: [
         {
-          icon: "fa fa-list fa-lg",
-          url: "3",
-          name: "目录管理",
+          icon: "fa fa-hospital-o fa-lg",
+          url: "2",
+          name: "住院管理",
           list: [
             {
-              url: "medicalMenu",
-              name: "药品目录保存"
+              url: "hosModify",
+              name: "住院登记信息修改"
             },
             {
-              url: "treatMenu",
-              name: "诊疗目录保存"
+              url: "hosSecond",
+              name: "二次住院备案"
             },
             {
-              url: "menuUpload",
-              name: "目录对应上传"
+              url: "setDeclar",
+              name: "住院结算费用申报"
+            }
+          ]
+        },
+        {
+          icon: "fa fa-cloud-download fa-lg",
+          url: "4",
+          name: "下载管理",
+          list: [
+            {
+              url: "codeLoad",
+              name: "代码表下载"
             },
             {
-              url: "menuDownload",
-              name: "医疗机构目录上传"
+              url: "diseaseLoad",
+              name: "病种信息下载"
             },
             {
-              url: "menuXiazai",
-              name: "目录对应结果下载"
+              url: "medicalLoad",
+              name: "医保药品目录下载"
             },
             {
-              url: "menuQuxiao",
-              name: "目录对应取消"
+              url: "treatLoad",
+              name: "医保诊疗目录下载"
             },
+            {
+              url: "serviceLoad",
+              name: "医保服务目录下载"
+            }
+          ]
+        },
+        {
+          icon: "fa fa-print fa-lg",
+          url: "6",
+          name: "明细打印",
+          list: [
+            {
+              url: "monthPrint",
+              name: "医保月度结算打印"
+            },
+            {
+              url: "birthPrint",
+              name: "生育月度费用明细打印"
+            },
+            {
+              url: "InsurPayment",
+              name: "医疗保险待遇支付明细表"
+            },
+            {
+              url: "Treatment",
+              name: "医疗保险待遇汇总表"
+            }
+          ]
+        },
+        {
+          icon: "fa fa-comment-o fa-lg",
+          url: "7",
+          name: "信息查询下载",
+          list: [
+            {
+              url: "Announcement",
+              name: "通告信息查询"
+            },
+            {
+              url: "registerDown",
+              name: "登记信息查询下载"
+            },
+            {
+              url: "fileDown",
+              name: "费用明细信息查询下载"
+            },
+            {
+              url: "classDown",
+              name: "费用分类信息查询下载"
+            },
+            {
+              url: "SettleDown",
+              name: "结算信息查询"
+            }
+          ]
+        },
+        {
+          icon: "fa fa-list-ul fa-lg",
+          url: "8",
+          name: "月结对账",
+          list: [
+            {
+              url: "monRecon",
+              name: "月结对账"
+            },
+            {
+              url: "Reconprint",
+              name: "结算费用对账表打印"
+            },
+            {
+              url: "summaryPrint",
+              name: "结算费用汇总表打印"
+            }
           ]
         }
-      ], */
-
+      ] */
     };
   },
   computed: {
@@ -197,19 +281,19 @@ export default {
           // console.log(res)
           if (res.data.code == 0) {
             let urlObj = [];
-             urlObj = res.data.menuList;
-              for (let i = 0; i < urlObj.length; i++) {
-                urlObj[i].url = i.toString();
-                //to do....
-              }
-              let home =  {
-                        icon: "fa fa-home fa-lg",
-                        url: "home",
-                        name: "首页"
-                      }
-              urlObj.unshift(home);        
-              this.items = urlObj;
-              // console.log(this.items)
+            urlObj = res.data.menuList;
+            for (let i = 0; i < urlObj.length; i++) {
+              urlObj[i].url = i.toString();
+              //to do....
+            }
+            let home = {
+              icon: "fa fa-home fa-lg",
+              url: "home",
+              name: "首页"
+            };
+            urlObj.unshift(home);
+            this.items = urlObj;
+            // console.log(this.items)
           }
         })
         .catch(error => {

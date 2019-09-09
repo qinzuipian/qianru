@@ -197,6 +197,9 @@ export default {
                 case "2":
                   this.foulData[i].AKA213 = "诊疗目录";
                   break;
+                case "3":
+                  this.foulData[i].AKA213 = "服务目录";
+                  break;
               }
             }
           } else {
@@ -235,6 +238,9 @@ export default {
                   break;
                 case "2":
                   this.foulData[i].AKA213 = "诊疗目录";
+                  break;
+                case "3":
+                  this.foulData[i].AKA213 = "服务目录";
                   break;
               }
             }
@@ -277,9 +283,7 @@ export default {
         val[i].BAA001 == undefined
           ? (val[i].BAA001 = "")
           : (val[i].BAA001 = val[i].BAA001);
-        val[i].AKA213 == "药品目录"
-          ? (val[i].AKA213 = "1")
-          : (val[i].AKA213 = "2");
+        val[i].AKA213 == "药品目录"?(val[i].AKA213 = "1"):(val[i].AKA213 == "诊疗目录"?val[i].AKA213 = "2":val[i].AKA213 = "3");
       }
       this.corrList = val;
       console.log(this.corrList);

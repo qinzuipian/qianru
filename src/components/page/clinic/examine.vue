@@ -367,9 +367,9 @@ export default {
           // this.hosdata.AAB034='商洛市';
           /* this.hosdata.AAB034='611401';
 							console.log(this.hosdata); */
-        } else if (res.data.code == 203) {
+        } /* else if (res.data.code == 203) {
           this.$message.error("该患者未结算");
-        } else {
+        } */ else {
           this.$message.error(res.data.msg);
         }
       });
@@ -410,7 +410,7 @@ export default {
       console.log(state);
       if (state == 1) {
         var res = WSCall.retbiz;
-        /*  var state = 1;
+    /*    var state = 1;
 				if(state == 1) {
 					var res = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
           +"                                             "
@@ -564,7 +564,8 @@ export default {
             axios.PARK_API +
             "/medical_reimbursement/settlementcostinfo/saveSettlementCost",
           data: {
-            xml: wordsContent
+            xml: wordsContent,
+            type: "1"
           },
           headers: {
             "Content-Type": "application/json;charset=UTF-8"

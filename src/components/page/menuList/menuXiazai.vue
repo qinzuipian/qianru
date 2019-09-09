@@ -11,7 +11,7 @@
                 </el-option>
             </el-select>
             <span>项目名称：</span>
-            <el-input style="width: 200px; height: 30px;" v-model="menuname" placeholder="请输入内容"></el-input>
+            <el-input style="width: 180px; height: 30px;" v-model="menuname" placeholder="请输入内容"></el-input>
             <el-date-picker
             v-model="startTime"
             type="datetime"
@@ -554,7 +554,7 @@ export default {
 }
 .el-date-editor.el-input,
 .el-date-editor.el-input__inner {
-  width: 180px;
+  width: 170px;
 }
 
 </style>

@@ -68,7 +68,6 @@
 
 <script>
 import axios from "axios";
-
 let moment = require("moment");
 export default {
   name: "examine",

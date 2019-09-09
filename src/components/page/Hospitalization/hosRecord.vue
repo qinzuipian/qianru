@@ -438,7 +438,7 @@ export default {
       if (state == 1) {
         var res = WSCall.retbiz;
 
-        /*  var state = 1;
+       /*  var state = 1;
 				if (state == 1) {
 				var res = "<?xml version=\"1.0\" encoding=\"GBK\" standalone=\"no\" ?>"
         +"<transferinfo>"
@@ -460,7 +460,7 @@ export default {
         +"	<datas>                  "
         +"		<data1>              "
         +"			<row>      "
-        +"				<AKC190>000000009515984</AKC190>"
+        +"				<AKC190>0000000095984</AKC190>"
         +"				<AKB020>SNYY0005</AKB020>       "
         +"				<AKB021>西关医院</AKB021>       "
         +"				<AKA101>05</AKA101>             "
@@ -578,7 +578,7 @@ export default {
         +"				<BKC257>0.00</BKC257></row>"
         +"		</data1>"
         +"	</datas>"
-        +"</transferinfo>"; */
+        +"</transferinfo>";  */
 
         var wordsContent = encodeURIComponent(res);
         // 将下载下来的数据保存到数据库

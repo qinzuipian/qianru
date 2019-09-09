@@ -258,12 +258,12 @@ export default {
     //添加
     hospitalDown(param) {
       console.log(param);
-      var state = WSCall.biz(param);
+       var state = WSCall.biz(param);
       console.log(state)
-      if (state == 1) {
+     if (state == 1) {
         var res = WSCall.retbiz;
 
-        /* 	var state = 1;
+       /*  var state = 1;
 				if (state == 1) {
 				var res = "<?xml version=\"1.0\" encoding=\"GBK\" standalone=\"no\" ?>"
         +"<transferinfo>"
@@ -412,7 +412,8 @@ export default {
             axios.PARK_API +
             "/medical_reimbursement/settlementcostinfo/saveSettlementCost",
           data: {
-            xml: wordsContent
+            xml: wordsContent,
+            type: "0"
           },
           headers: {
             "Content-Type": "application/json;charset=UTF-8"
@@ -432,10 +433,10 @@ export default {
     hospitalUpload(param) {
       // console.log(param)
       var state = WSCall.biz(param);
-      if (state == 1) {
-        var res = WSCall.retbiz;
+    /*   if (state == 1) {
+        var res = WSCall.retbiz; */
 
-        /* 	var state = 1;
+        	var state = 1;
 				if (state == 1) {
 				var res = "<?xml version=\"1.0\" encoding=\"GBK\" standalone=\"no\" ?>"
         +"<transferinfo>"
@@ -575,7 +576,7 @@ export default {
         +"				<BKC257>0.00</BKC257></row>"
         +"		</data1>"
         +"	</datas>"
-        +"</transferinfo>"; */
+        +"</transferinfo>";
         var wordsContent = encodeURIComponent(res);
         // 将下载下来的数据保存到数据库
         axios({
